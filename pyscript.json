@@ -1,3 +1,3 @@
 {
-    "packages": ["arrr", "matplotlib"]
+    "packages": ["polars", "python_ags4"]
 }

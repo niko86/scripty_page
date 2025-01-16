@@ -15,3 +15,5 @@ buffer = io.StringIO(response.read())
 
 ags_output = document.querySelector("#output")
 ags_output.innerHTML = buffer.readlines()
+# "https://github.com/pola-rs/polars/"
+# https://raw.githubusercontent.com/pola-rs/polars/releases/download/py-1.20.0/polars-1.20.0-cp39-abi3-emscripten_3_1_58_wasm32.whl

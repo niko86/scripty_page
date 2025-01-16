@@ -10,4 +10,6 @@ def translate_english(event):
     output_div.innerText = arrr.translate(english)
     
     # Create the plot
-    display(plt.plot([1, 2, 3, 4]), target="plot")
+    fig, ax = plt.subplots()
+    ax.plot([1, 2, 3, 4])
+    display(fig, target="plot")

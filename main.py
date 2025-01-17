@@ -11,7 +11,7 @@ def uploaded_ags(uploaded_data) -> None:
     if uploaded_data is not None:
         io_buffer = io.BytesIO(uploaded_data)
         df = pd.read_csv(io_buffer, skiprows=1, nrows=3)
-        pn.Row(pn.pane.DataFrame(df, width=400)).servable(target="output")
+        pn.Row(pn.pane.DataFrame(df)).servable(target="output")
 
 file_upload = pn.widgets.FileInput(accept='.ags', multiple=False)
 load_ags_bind = pn.bind(uploaded_ags, file_upload)

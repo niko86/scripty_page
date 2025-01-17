@@ -6,11 +6,11 @@ from pyodide.ffi import JsProxy
 from pyscript import document
 
 url = r"https://raw.githubusercontent.com/niko86/scripty_page/refs/heads/master/East%20West%20Rail%20BGS%20Pre%20October%202018%20upload%20(partial).ags"
+#url = r"https://gitlab.com/ags-data-format-wg/ags-python-library/-/raw/main/notebooks/East%20West%20Rail%20BGS%20Pre%20October%202018%20upload%20(partial).ags"
 url_output = document.querySelector("#url")
-url_output.innerHTML = f"Ready to load AGS from: {url}"
+url_output.innerHTML = f"Ready to load AGS from: \n{url}"
 
 def load_ags(event: JsProxy) -> None:
-    print(type(event))
     # Fetch the content from the URL
     response = open_url(url)
     # Read the content into a buffer

@@ -1,0 +1,11 @@
+{
+    "files": {
+        "/models.py": "./models.py"
+    },
+    "packages": [
+        "bokeh",
+        "pyweb",
+        "python-AGS4"
+    ],
+    "interpreter": "https://cdn.jsdelivr.net/pyodide/v0.27.1/full/pyodide.mjs"
+}

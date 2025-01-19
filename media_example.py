@@ -8,7 +8,6 @@ async def list_media_devices(event=None):
     global devices
     for i, device in enumerate(await media.list_devices()):
         devices[device.id] = device
-        
         label = f"{i} - ({device.kind}) {device.label} [{device.id}]"
         display(label, append=True, target="result")
         
@@ -27,4 +26,4 @@ async def connect_to_device(event):
 async def camera_click(event):
     video.snap().download()
     
-list_media_devices()
+await list_media_devices()

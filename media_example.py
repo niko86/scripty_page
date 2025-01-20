@@ -1,5 +1,7 @@
 from pyscript import display, when, document, media
 
+import cv2
+
 device_select = document.querySelector("#devices")
 video = document.querySelector("video")
 devices = {}
@@ -26,4 +28,13 @@ async def connect_to_device(event):
 async def camera_click(event):
     video.snap().download()
     
+@when("click", "#track")
+async def camera_click(event):
+    print(device_select.value)
+    cap = cv2.VideoCapture(devices[device_select.value])
+    ret, frame = cap.read()
+    display(frame)
+    cap.release()
+    
 await list_media_devices()
+

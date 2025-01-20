@@ -1,3 +1,6 @@
 {
+    "packages": [
+        "opencv-python"
+    ],
     "interpreter": "https://cdn.jsdelivr.net/pyodide/v0.27.1/full/pyodide.mjs"
 }

@@ -1,5 +1,5 @@
 from pyscript import display, when, document, media
-
+import sys, inspect
 import cv2
 
 device_select = document.querySelector("#devices")
@@ -30,7 +30,7 @@ async def camera_click(event):
     
 @when("click", "#track")
 async def camera_click(event):
-    print(device_select.value)
+    # TODO Actually add some tracking code!!
     cap = cv2.VideoCapture(devices[device_select.value])
     ret, frame = cap.read()
     display(frame)

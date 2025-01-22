@@ -9,9 +9,8 @@ from pyscript import display, document
 
 from models import AgsMap
 
-async def index_ags_file(
-    filename: str, encoding: str
-) -> dict[str, AgsMap]:
+
+async def index_ags_file(filename: str, encoding: str) -> dict[str, AgsMap]:
     groups: dict[str, AgsMap] = dict()
     current_group: str = None
 
@@ -31,9 +30,7 @@ async def index_ags_file(
             elif line.startswith(b'"HEADING"'):
                 groups[current_group].heading_row = line_start_bytes
                 groups[current_group].heading_row_num = line_counter
-                groups[
-                    current_group
-                ].data_row_start = line_start_bytes
+                groups[current_group].data_row_start = line_start_bytes
             elif line.startswith(b'"TYPE"'):
                 groups[current_group].type_row = line_start_bytes
                 groups[current_group].type_row_num = line_counter
@@ -51,13 +48,12 @@ async def index_ags_file(
 
     return groups
 
+
 from pyscript.web import page, div, input_
 
 output_div = document.querySelector("#output")
 output_div.innerHTML = ""
-page.append(
-    input_(type="file", id="ags_file", name="ags_file", accept=".ags")
-)
+page.append(input_(type="file", id="ags_file", name="ags_file", accept=".ags"))
 document.querySelector("#ags_file")
 
 # df = pl.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]})

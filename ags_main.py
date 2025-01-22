@@ -12,7 +12,7 @@ from bokeh.plotting import figure
 from bokeh.models import Legend, HoverTool, ColumnDataSource
 from bokeh.palettes import Category20, Category10, Category20b, Category20c
 
-pn.extension("tabulator", design=Bootstrap)
+pn.extension("tabulator")  # , design=Bootstrap)
 
 select_box = pn.widgets.Select(name="Select Table", options=[])
 file_upload = pn.widgets.FileInput(accept=".ags", multiple=False)
@@ -121,6 +121,7 @@ def show_plot(
             renderers.append((str(group), [renderer]))
 
         # Configure HoverTool
+        # colors = brewer['YlGnBu'][len(categories)]
         hover = HoverTool(tooltips=[("X", "@x"), ("Y", "@y"), ("Group", "@group")])
         p.add_tools(hover)
 
@@ -136,7 +137,15 @@ def show_plot(
         hover = HoverTool(tooltips=[("X", "@x"), ("Y", "@y")])
         p.add_tools(hover)
 
-    return pn.pane.Bokeh(column(p, width_policy="max", height_policy="max", sizing_mode="stretch_both"))
+    return pn.pane.Bokeh(
+        column(
+            p,
+            min_height=500,
+            width_policy="max",
+            height_policy="max",
+            sizing_mode="stretch_both",
+        )
+    )
 
 
 load_ags_bind = pn.bind(uploaded_ags, file_upload)
@@ -156,7 +165,11 @@ widgets = pn.WidgetBox(
 )
 
 # Layout
-pn.FlexBox(
-    pn.Row(widgets, plot_bind, width_policy="max"),
-    pn.Card(table_bind, title="Group Viewer", width_policy="max"),
-).servable(target="output")
+# pn.FlexBox(
+#     pn.Row(widgets, plot_bind, width_policy="max"),
+#     pn.Card(table_bind, title="Group Viewer", width_policy="max"),
+# ).servable(target="app")
+
+pn.template.BootstrapTemplate(
+    title="AGS Viewer", main=[widgets, plot_bind, table_bind]
+).servable(target="app")

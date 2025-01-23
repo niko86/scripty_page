@@ -1,8 +1,12 @@
+import micropip
+await micropip.install("https://cdn.holoviz.org/panel/1.5.5/dist/wheels/bokeh-3.6.2-py3-none-any.whl")
+await micropip.install("https://cdn.holoviz.org/panel/1.5.5/dist/wheels/panel-1.5.5-py3-none-any.whl")
+
 import io
 import warnings
 
 warnings.simplefilter(action="ignore", category=DeprecationWarning)
-
+from pyscript import document
 import pandas as pd
 import panel as pn
 from panel.theme import Bootstrap
@@ -12,7 +16,8 @@ from bokeh.plotting import figure
 from bokeh.models import Legend, HoverTool, ColumnDataSource
 from bokeh.palettes import Category20, Category10, Category20b, Category20c
 
-pn.extension("tabulator")  # , design=Bootstrap)
+pn.extension("tabulator", design=Bootstrap)
+pn.extension("perspective")
 
 select_box = pn.widgets.Select(name="Select Table", options=[])
 file_upload = pn.widgets.FileInput(accept=".ags", multiple=False)
@@ -21,6 +26,9 @@ y_select = pn.widgets.Select(name="Y-Axis", options=[])
 group_select = pn.widgets.Select(name="Group By", options=[], disabled=True)
 marker_size_slider = pn.widgets.IntSlider(name="Marker Size", start=1, end=20, value=5)
 
+
+def update_html(id: str, content: str):
+    document.querySelector(f"#{id}").innerHTML = content
 
 def get_selected_table(
     tables: dict[str, pd.DataFrame], table_name: str
@@ -165,11 +173,11 @@ widgets = pn.WidgetBox(
 )
 
 # Layout
-# pn.FlexBox(
-#     pn.Row(widgets, plot_bind, width_policy="max"),
-#     pn.Card(table_bind, title="Group Viewer", width_policy="max"),
-# ).servable(target="app")
-
-pn.template.BootstrapTemplate(
-    title="AGS Viewer", main=[widgets, plot_bind, table_bind]
+pn.FlexBox(
+    pn.Row(widgets, plot_bind, width_policy="max"),
+    pn.Card(table_bind, title="Group Viewer", width_policy="max"),
 ).servable(target="app")
+df = pd.DataFrame({"a": [1,2,3], "b": [4,5,6]})
+pn.pane.Perspective(df, width=1000).servable(target="data")
+
+update_html("app", "")

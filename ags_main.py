@@ -1,6 +1,11 @@
 import micropip
-await micropip.install("https://cdn.holoviz.org/panel/1.5.5/dist/wheels/bokeh-3.6.2-py3-none-any.whl")
-await micropip.install("https://cdn.holoviz.org/panel/1.5.5/dist/wheels/panel-1.5.5-py3-none-any.whl")
+
+await micropip.install(
+    "https://cdn.holoviz.org/panel/1.5.5/dist/wheels/bokeh-3.6.2-py3-none-any.whl"
+)
+await micropip.install(
+    "https://cdn.holoviz.org/panel/1.5.5/dist/wheels/panel-1.5.5-py3-none-any.whl"
+)
 
 import io
 import warnings
@@ -16,19 +21,20 @@ from bokeh.plotting import figure
 from bokeh.models import Legend, HoverTool, ColumnDataSource
 from bokeh.palettes import Category20, Category10, Category20b, Category20c
 
-pn.extension("tabulator", design=Bootstrap)
-pn.extension("perspective")
+pn.extension("tabulator")
+pn.extension("perspective", design=Bootstrap)
 
-select_box = pn.widgets.Select(name="Select Table", options=[])
+table_selector = pn.widgets.Select(name="Select Table", options=[])
 file_upload = pn.widgets.FileInput(accept=".ags", multiple=False)
-x_select = pn.widgets.Select(name="X-Axis", options=[])
-y_select = pn.widgets.Select(name="Y-Axis", options=[])
-group_select = pn.widgets.Select(name="Group By", options=[], disabled=True)
+x_axis_selector = pn.widgets.Select(name="X-Axis", options=[])
+y_axis_selector = pn.widgets.Select(name="Y-Axis", options=[])
+group_by_selector = pn.widgets.Select(name="Group By", options=[], disabled=True)
 marker_size_slider = pn.widgets.IntSlider(name="Marker Size", start=1, end=20, value=5)
 
 
 def update_html(id: str, content: str):
     document.querySelector(f"#{id}").innerHTML = content
+
 
 def get_selected_table(
     tables: dict[str, pd.DataFrame], table_name: str
@@ -44,7 +50,7 @@ def uploaded_ags(uploaded_data) -> dict:
     if uploaded_data:
         io_buffer = io.BytesIO(uploaded_data)
         tables, _ = AGS4.AGS4_to_dataframe(io_buffer)
-        select_box.options = list(tables.keys())
+        table_selector.options = list(tables.keys())
         tables = {
             key: AGS4.convert_to_numeric(value.drop("HEADING", axis=1))
             for key, value in tables.items()
@@ -65,21 +71,21 @@ def display_ags_data(tables: dict[str, pd.DataFrame], table_name: str):
 
     # Populate numeric column selectors
     numeric_cols = df.select_dtypes(include=["number"]).columns.to_list()
-    x_select.options = numeric_cols
-    y_select.options = numeric_cols
+    x_axis_selector.options = numeric_cols
+    y_axis_selector.options = numeric_cols
 
     # Populate string column selectors for grouping
     string_cols = df.select_dtypes(include=["object", "category"]).columns.to_list()
     if string_cols:
-        group_select.options = [None] + string_cols
-        group_select.disabled = False
-        group_select.value = None  # Set default to None
+        group_by_selector.options = [None] + string_cols
+        group_by_selector.disabled = False
+        group_by_selector.value = None  # Set default to None
     else:
-        group_select.options = [None]
-        group_select.disabled = True
-        group_select.value = None
+        group_by_selector.options = [None]
+        group_by_selector.disabled = True
+        group_by_selector.value = None
 
-    return tabulator
+    return pn.pane.Perspective(df, columns=list(df.columns), height_policy="max", width_policy="max", sizing_mode="stretch_both")
 
 
 def show_plot(
@@ -155,29 +161,32 @@ def show_plot(
         )
     )
 
-
 load_ags_bind = pn.bind(uploaded_ags, file_upload)
-table_bind = pn.bind(display_ags_data, load_ags_bind, select_box)
+table_bind = pn.bind(display_ags_data, load_ags_bind, table_selector)
 plot_bind = pn.bind(
     show_plot,
     load_ags_bind,
-    select_box,
-    x_select,
-    y_select,
-    group_select,
+    table_selector,
+    x_axis_selector,
+    y_axis_selector,
+    group_by_selector,
     marker_size_slider,
 )
 
 widgets = pn.WidgetBox(
-    file_upload, select_box, x_select, y_select, group_select, marker_size_slider
+    file_upload,
+    table_selector,
+    x_axis_selector,
+    y_axis_selector,
+    group_by_selector,
+    marker_size_slider,
 )
 
-# Layout
-pn.FlexBox(
-    pn.Row(widgets, plot_bind, width_policy="max"),
-    pn.Card(table_bind, title="Group Viewer", width_policy="max"),
-).servable(target="app")
-df = pd.DataFrame({"a": [1,2,3], "b": [4,5,6]})
-pn.pane.Perspective(df, width=1000).servable(target="data")
+template = pn.FlexBox(
+    pn.Row(widgets, table_bind, height_policy="max", width_policy="max", sizing_mode="stretch_both"), #plot_bind
+    #pn.Card(table_bind, title="Group Viewer", width_policy="max"),
+    height_policy="max", width_policy="max", sizing_mode="stretch_both"
+)
 
-update_html("app", "")
+template.servable(target="container")
+update_html("container", "")

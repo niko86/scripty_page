@@ -5,22 +5,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>📂 AGS File Loader 🏴‍☠️</title>
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.js"></script>
+
+    <script type="text/javascript"
+        src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.6.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.2.min.js"></script>
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@holoviz/panel@1.5.5/dist/panel.min.js"></script>
-    
-    <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator.min.css">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
-    
+    <script type="text/javascript"
+        src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/bootstrap5/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.holoviz.org/panel/1.5.5/dist/panel.min.js"></script>
+
+    <script type="module"
+        src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective@2.9.0/dist/cdn/perspective.js"></script>
+    <script type="module"
+        src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/cdn/perspective-viewer.js"></script>
+    <script type="module"
+        src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer-datagrid@2.9.0/dist/cdn/perspective-viewer-datagrid.js"></script>
+    <script type="module"
+        src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer-d3fc@2.9.0/dist/cdn/perspective-viewer-d3fc.js"></script>
+    <script type="module">
+        import perspective from "https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective@2.9.0/dist/cdn/perspective.js";
+        window.perspective = perspective
+    </script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script> <!-- Template CSS -->
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/css/loadingspinner.css">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/css/markdown.css">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/css/loading.css?v=1.5.5">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/theme/default.css?v=1.5.5">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/theme/bootstrap_default.css?v=1.5.5">
+    <link rel="stylesheet"
+        href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/bootstraptemplate/bootstrap.css?v=1.5.5">
+
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.11.1/core.css">
     <script type="module" src="https://pyscript.net/releases/2024.11.1/core.js"></script>
+
+    <script type="py" src="./ags_main.py" config="./ags_pyscript.json"></script>
 </head>
 
 <body>
-    <script type="py" src="./ags_main.py" config="./ags_pyscript.json"></script>
-    <div id="app">Loading ...</div>
-    <div id="data"></div>
+    <div class="container-fluid d-flex flex-column vh-100 overflow-hidden" id="container">Loading ...</div>
 </body>
 
 </html>

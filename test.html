@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <title>Test App</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.holoviz.org/panel/1.5.5/dist/images/apple-touch-icon.png">
+        <link rel="icon" href="https://cdn.holoviz.org/panel/1.5.5/dist/images/favicon.ico" type="">
+    <meta name="name" content="Test App">
+
+    <!-- Template JS -->
+    <script src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/bootstrap5/js/bootstrap.bundle.min.js"></script>
+    <style>
+      html, body {
+	display: flow-root;
+        box-sizing: border-box;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/css/fonts.css?v=1.5.5" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/css/themes.css?v=1.5.5" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/css/variables.css?v=1.5.5" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/css/monokai.css?v=1.5.5" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/css/solarized.css?v=1.5.5" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/css/pro.css?v=1.5.5" type="text/css" />
+
+<style type="text/css">
+
+:host(.pn-loading):before, .pn-loading:before {
+  background-color: #c3c3c3;
+  mask-size: auto calc(min(50%, 400px));
+  -webkit-mask-size: auto calc(min(50%, 400px));
+}
+.py-error { display: none; }</style><script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+<script type="esms-options">{"shimMode": true}</script>
+
+<script type="text/javascript" src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js"></script>
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js"></script>
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.6.2.min.js"></script>
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.2.min.js"></script>
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js"></script>
+<script type="text/javascript" src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/bootstrap5/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.holoviz.org/panel/1.5.5/dist/panel.min.js"></script>
+
+<script type="module" src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective@2.9.0/dist/cdn/perspective.js"></script>
+<script type="module" src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer@2.9.0/dist/cdn/perspective-viewer.js"></script>
+<script type="module" src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer-datagrid@2.9.0/dist/cdn/perspective-viewer-datagrid.js"></script>
+<script type="module" src="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective-viewer-d3fc@2.9.0/dist/cdn/perspective-viewer-d3fc.js"></script>
+<script type="module">
+  import perspective from "https://cdn.holoviz.org/panel/1.5.5/dist/bundled/perspective/@finos/perspective@2.9.0/dist/cdn/perspective.js";
+  window.perspective = perspective
+</script><script type="text/javascript">
+  Bokeh.set_log_level("info");
+</script>    <!-- Template CSS -->
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/css/loadingspinner.css">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/css/markdown.css">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/css/loading.css?v=1.5.5">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/theme/default.css?v=1.5.5">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/theme/bootstrap_default.css?v=1.5.5">
+    <link rel="stylesheet" href="https://cdn.holoviz.org/panel/1.5.5/dist/bundled/bootstraptemplate/bootstrap.css?v=1.5.5">
+    <style type="text/css">
+    
+:host(.pn-loading):before, .pn-loading:before {
+  background-color: #c3c3c3;
+  mask-size: auto calc(min(50%, 400px));
+  -webkit-mask-size: auto calc(min(50%, 400px));
+}
+    </style>
+
+    <style>
+      :root {
+	--header-background: var(--design-primary-color, var(--panel-primary-color));
+	--header-color: var(--design-primary-text-color, var(--panel-on-primary-color));
+	--sidebar-width: 350px;
+      }
+      #header, #header :host {
+	--bs-body-bg: var(--header-background);
+	--bs-body-color: var(--header-color);
+	--design-background-text-color: var(--header-color);
+	--design-background-color: var(--header-background);
+	background-color: var(--header-background);
+	color: var(--header-color);
+      }
+      #sidebar {
+	max-width: var(--sidebar-width) !important;
+	width: var(--sidebar-width);
+      }
+    </style>
+  </head>
+  <body class="pn-loading pn-arc">
+<div class="container-fluid d-flex flex-column vh-100 overflow-hidden" id="container">
+  <nav class="navbar navbar-expand-md sticky-top shadow" id="header">
+    <button type="button" id="sidebar-toggle" class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-expanded="true" aria-label="Toggle sidebar" aria-controls="sidebar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="app-header">
+<a class="title" href="" >&nbsp;Test App</a>    </div>
+    <div id="header-items">
+    </div>
+    <div class="pn-busy-container">
+      <div id="40bbd9b0-fe60-4df8-8de8-8758c3e7abf5" data-root-id="p1016" style="display: contents;"></div>
+    </div>
+  </nav>
+
+  <div class="row overflow-hidden" id="content">
+    <div class="sidenav collapse-horizontal show" id="sidebar">
+      <ul class="nav flex-column">
+        <div id="a34ff37e-be0d-47f3-9f7f-cbc2b5aeacd5" data-root-id="p1034" style="display: contents;"></div>
+      </ul>
+    </div>
+
+    <div class="col mh-100 float-left" id="main">
+          <div id="fe2ff949-1855-4eb4-9832-c44d7e553d5a" data-root-id="p1032" style="display: contents;"></div>
+    </div>
+  </div>
+
+  <div id="pn-Modal" class="modal fade pn-modal" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content pn-modal-content">
+	<button type="button" id="pn-closeModal" class="btn-close pn-modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	<div class="modal-body">
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="b3916102-3589-4978-b15c-1a499e63c5e4" data-root-id="p1010" style="display: contents;"></div>
+<div id="f17c6144-4ad0-48fa-a641-b90c7e4b9992" data-root-id="p1013" style="display: contents;"></div>
+<div id="08a503fd-041b-4a7f-91c4-76cad8826f92" data-root-id="p1002" style="display: contents;"></div>
+<div id="2cb4ffd8-9ac2-4e39-908a-f03f1b775c71" data-root-id="p1014" style="display: contents;"></div>
+
+
+  
+    <script type="text/javascript">
+    async function main() {
+      let pyodide = await loadPyodide();
+      await pyodide.loadPackage("micropip");
+      await pyodide.runPythonAsync(`
+        import micropip
+        await micropip.install(['https://cdn.holoviz.org/panel/wheels/bokeh-3.6.2-py3-none-any.whl', 'https://cdn.holoviz.org/panel/1.5.5/dist/wheels/panel-1.5.5-py3-none-any.whl', 'pyodide-http==0.2.1', 'pandas']);
+      `);
+      code = `\nimport asyncio\n\nfrom panel.io.pyodide import init_doc, write_doc\n\ninit_doc()\n\nimport panel as pn\nimport pandas as pd\n\npn.extension("perspective", design="bootstrap")\n\npn.template.BootstrapTemplate(\n    title="Test App",\n    sidebar=[pn.pane.Markdown("Hello World!")],\n    main=[pn.pane.Perspective(pd.DataFrame({"a": [1, 2, 3], "b": [4, 5, 6]}), height_policy="max", width_policy="max", sizing_mode="stretch_width")],\n).servable()\n\n\nawait write_doc()`
+      await pyodide.runPythonAsync(code);
+    }
+    main();
+    </script>
+  </body>
+</html>

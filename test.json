@@ -1,0 +1,42 @@
+{
+    "project": {
+        "project_number": "API_TEST_MULTIPLE_TESTS",
+        "project_name": "API_TEST_MULTIPLE_TESTS",
+        "project_status": "open",
+        "customer_name": "API_TEST_MULTIPLE_TESTS"
+    },
+    "boreholes": [
+        {
+            "borehole_name": "BH1",
+            "borehole_status": "complete",
+            "project_number": "API_TEST_MULTIPLE_TESTS"
+        }
+    ],
+    "samples": [
+        {
+            "borehole_name": "BH1",
+            "top_depth": 1.3,
+            "base_depth": null,
+            "sample_identifier": null,
+            "sample_number": "01-01",
+            "sample_length": null,
+            "sample_type": "B",
+            "sample_condition": null,
+            "sample_diameter": null,
+            "sample_mass": null,
+            "sample_remarks": "RS Bishop Samples to be put aside - Consett arranging collection for testing externally with Sub-Contractor - AK 04/06/2024 - AYM-A01_BH_Stage 2 - AA Email 21/05 - AK 23/05/2024",
+            "tests": [
+                {
+                    "test_code": "Electrical Conductivity Reconstituted",
+                    "status": "test_approved",
+                    "field_test": false
+                },
+                {
+                    "test_code": "Electrical Conductivity Reconstituted",
+                    "status": "test_approved",
+                    "field_test": false
+                }
+            ]
+        }
+    ]
+}

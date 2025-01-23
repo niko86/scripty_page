@@ -1,11 +1,10 @@
 {
-    "interpreter": "https://cdn.jsdelivr.net/pyodide/v0.27.1/full/pyodide.mjs",
+    "ignore-interpreter": "https://cdn.jsdelivr.net/pyodide/v0.27.1/full/pyodide.mjs",
     "packages": [
-        "param==2.2.0",
+        "https://cdn.holoviz.org/panel/1.5.5/dist/wheels/bokeh-3.6.2-py3-none-any.whl",
         "https://cdn.holoviz.org/panel/1.5.5/dist/wheels/panel-1.5.5-py3-none-any.whl",
         "python-AGS4"
     ],
     "ignore": [
-        "https://cdn.holoviz.org/panel/1.5.5/dist/wheels/bokeh-3.6.2-py3-none-any.whl"
     ]
 }
